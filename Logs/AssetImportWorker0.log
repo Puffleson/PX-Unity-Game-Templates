@@ -178,3 +178,4 @@ Received Import Request.
   path: Assets/Sprites/Misc/Sample
   artifactKey: Guid(cc5c73b6e9f55f541b8acf40b2384d60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Sprites/Misc/Sample using Guid(cc5c73b6e9f55f541b8acf40b2384d60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08115c6aff909d169d618259eadf638e') in 0.001505 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
