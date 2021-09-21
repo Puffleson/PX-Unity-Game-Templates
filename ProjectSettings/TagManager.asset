@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerKillEnemy
+  - Lives
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - WaypointDetect
   - 
   - Key
-  - 
+  - LadderOrRope
   - 
   - 
   - 
