@@ -1873,6 +1873,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 954297891}
     - target: {fileID: 1915988998893952399, guid: d121d8f4d4fa40a48aa4706e50c6eeee, type: 3}
+      propertyPath: winSceneName
+      value: WinScreen 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915988998893952399, guid: d121d8f4d4fa40a48aa4706e50c6eeee, type: 3}
       propertyPath: loseSceneName
       value: LoseScene
       objectReference: {fileID: 0}

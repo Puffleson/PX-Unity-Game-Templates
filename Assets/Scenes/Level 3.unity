@@ -1548,7 +1548,7 @@ Transform:
   m_LocalScale: {x: 1.9128, y: 1.9128, z: 1.9128}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1244029591
 GameObject:
@@ -1987,7 +1987,7 @@ Transform:
   - {fileID: 823884334}
   - {fileID: 993817954}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1584152200
 PrefabInstance:
@@ -2328,7 +2328,7 @@ Transform:
   - {fileID: 1222825120}
   - {fileID: 275166917}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4037006072041964324
 PrefabInstance:
@@ -2621,6 +2621,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1394555890}
+    - target: {fileID: 1915988998893952399, guid: d121d8f4d4fa40a48aa4706e50c6eeee, type: 3}
+      propertyPath: winSceneName
+      value: WinScreen 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1915988998893952399, guid: d121d8f4d4fa40a48aa4706e50c6eeee, type: 3}
       propertyPath: loseSceneName
       value: LoseScene
