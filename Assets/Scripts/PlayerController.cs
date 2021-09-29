@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour
@@ -22,10 +21,10 @@ public class PlayerController : MonoBehaviour
     private int currentKeyAmount = 0;
 
     //for live system
-    public LivesSystem gameManagerLivesSystemScript;
+    public LivesSystem LS;
 
     //for checkpoint reset system
-    public CheckpointResetSystem gameManagerCheckpointSystemScript;
+    public CheckpointResetSystem CRS;
 
     //for ladder and rope system
     private float inputVertical;
@@ -35,36 +34,33 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalMove = 0f;
     private Vector3 velocity = Vector3.zero;
-    private float m_MovementSmoothing = .05f;
+    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;
 
     // Runs when the character object turns on
     private void Awake()
     {
-
-        currentHealth = maxHealth;      // Set the current health as the maximum health to start
+        currentHealth = maxHealth;      // Set the current health as the maximum health to start 
     }
 
     // Runs when the Scene starts
     private void Start()
     {
-        SoundManagerScript.PlaySound("run");        // Play background music
+        //SoundManagerScript.PlaySound("run");        // Play background music
         m_Rigidbody = GetComponent<Rigidbody2D>();      // Get the current object's Rigidbody2D component
         m_Animator = GetComponent<Animator>();      // Get the current object's Animator component
         m_Collider = GetComponent<Collider2D>();   // Get the current object's Collider2D component
+        score = 0;
+        currentKeyAmount = 0;
 
     }
 
     // Runs once every frame
    private void Update()
    {
-
-       horizontalMove = Input.GetAxisRaw("Horizontal");     // Get the player input for the X axis (left and right) - keyboard keys "A" and "D"
+       horizontalMove = Input.GetAxis("Horizontal");     // Get the player input for the X axis (left and right) - keyboard keys "A" and "D"
        getMovementKey(horizontalMove * Time.fixedDeltaTime);      // Calls getMovementKey() function and passes the input the user presses
        getState();      // Calls getState() function
        m_Animator.SetInteger("state", (int)state);      // Set the current state the player is current in "State {idle, run, jump, fall}"
-
-       ladderAndropeSystem(); // Activating ladder System
-
     }
 
     // Uses the player input to move the character
@@ -72,47 +68,35 @@ public class PlayerController : MonoBehaviour
    {
         Vector3 targetVelocity = new Vector2(horizontalMove * 10f, m_Rigidbody.velocity.y);     //Calculates the new velocity that the player will use after the key is released
         // Runs if input is "A" meaning left
-        if (horizontalMove < 0 && (state == State.run || state == State.idle))
+        if (horizontalMove < 0)
        {
             m_Rigidbody.velocity = new Vector2(-speed,m_Rigidbody.velocity.y);      //  Move the player left
             m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);     //Smoothen the movement after the key is released
             transform.localScale = new Vector2(-1,1);       // Rotate the sprite to face left
        }
-       else if (horizontalMove > 0 && (state == State.run || state == State.idle)) // Runs if input is "D" meaning right
+       else if (horizontalMove > 0) // Runs if input is "D" meaning right
         {
             m_Rigidbody.velocity = new Vector2(speed,m_Rigidbody.velocity.y);     // Move the player right
             m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);     //Smoothen the movement after the key is released
             transform.localScale = new Vector2(1,1);      // Rotate the sprite to face right
         }
 
-       // Can only Jump when the "Spacebar" key is pressed and the player is touching the floor (Layer is Foreground layer)
+        // Can only Jump when the "Spacebar" key is pressed and the player is touching the floor (Layer is Foreground layer)
         if (Input.GetButtonDown("Jump") && m_Collider.IsTouchingLayers(ground))
-       {
-            SoundManagerScript.PlaySound("jump");       // Play jump sound
+        {
+            //SoundManagerScript.PlaySound("jump");       // Play jump sound
             m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, jumpForce);      // Moves the player object up at a certain jump force specified by the user
             state = State.jump;     // change the state to "Jump"
-       }
+        }
 
         if (Input.GetButtonDown("Jump") && m_Collider.IsTouchingLayers(ladder))
         {
-            SoundManagerScript.PlaySound("jump");       // Play jump sound
+            //SoundManagerScript.PlaySound("jump");       // Play jump sound
             m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, jumpForce);      // Moves the player object up at a certain jump force specified by the user
             state = State.jump;     // change the state to "Jump"
         }
 
-        if (horizontalMove < 0 && (state == State.jump || state == State.fall))
-        {
-            m_Rigidbody.velocity = new Vector2(-speed/2, m_Rigidbody.velocity.y);      //  Move the player left
-            m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);     //Smoothen the movement after the key is released
-            transform.localScale = new Vector2(-1, 1);       // Rotate the sprite to face left
-        }
-        else if (horizontalMove > 0 && (state == State.jump || state == State.fall)) // Runs if input is "D" meaning right
-        {
-            m_Rigidbody.velocity = new Vector2(speed/2, m_Rigidbody.velocity.y);     //slow speed in are for more control
-            m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);     //Smoothen the movement after the key is released
-            transform.localScale = new Vector2(1, 1);      // Rotate the sprite to face right
-        }
-    }
+   }
 
    private void getState()
    {
@@ -143,72 +127,72 @@ public class PlayerController : MonoBehaviour
         }
    }
 
-    // Decreases the player's health value
-    public void takeDamage(float damage)
-    {
-        // Decreases the player's current health by the damage value, if it is less than or equal to 0, player loses
-        if ((currentHealth -= damage) <= 0)
-        {
+   // Decreases the player's health value
+   public void takeDamage(float damage)
+   {
+       // Decreases the player's current health by the damage value, if it is less than or equal to 0, player loses
+       if ((currentHealth -= damage) <= 0)
+       {
 
-            gameManagerLivesSystemScript.deductLive(); //Calling deductLive function from LivesSystem Script of GameManager
+           LS.deductLive(); //Calling deductLive function from LivesSystem Script of GameManager
 
-            currentHealth = maxHealth; //Set health to full again
+           currentHealth = maxHealth; //Set health to full again
 
-            gameManagerCheckpointSystemScript.resetPlayerAtStart(); //Calling resetPlayerAtStart function from CheckpointResetSystem Script of GameManager
+           CRS.resetPlayerAtStart(); //Calling resetPlayerAtStart function from CheckpointResetSystem Script of GameManager
 
-            transform.localScale = new Vector2(1, 1); //player face to right
+           transform.localScale = new Vector2(1, 1); //player face to right
 
-        }
+       }
 
-        if (gameManagerLivesSystemScript.lives <= 0) //if lives are 0 or less than that then
-        {
-            PlayerPrefs.SetFloat("PlayerScore", score);     // Set global scene variable to use in Win and Lose Scenes
-            SceneManager.LoadScene("loseScene");      // Change to lose screen
+       if (LS.lives <= 0) //if lives are 0 or less than that then
+       {
+           PlayerPrefs.SetFloat("PlayerScore", score);     // Set global scene variable to use in Win and Lose Scenes
+           SceneManager.LoadScene("loseScene");      // Change to lose screen
 
-        }
+       }
 
-    }
+   }
 
-    private void ladderAndropeSystem()
-    {
+   private void ladderAndropeSystem()
+   {
 
-        //Ladder And Rope System "START"
+       //Ladder And Rope System "START"
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distance, whatIsLadder); //getting the position{collider} and layer information of ladderORrope
+       RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distance, whatIsLadder); //getting the position{collider} and layer information of ladderORrope
 
-        if (hitInfo.collider != null) //if collider is there on ladderORrope then
-        {
+       if (hitInfo.collider != null) //if collider is there on ladderORrope then
+       {
 
-            isClimbing = true; //set the isClimbing variable to "true" means it is climbing on the ladderORrope
-            state = State.idle; //changing the player state to idle if it is not moving for better presentation
+           isClimbing = true; //set the isClimbing variable to "true" means it is climbing on the ladderORrope
+           state = State.idle; //changing the player state to idle if it is not moving for better presentation
 
-        }
+       }
 
-        else
-        {
+       else
+       {
 
-            isClimbing = false; //set the isClimbing variable to "false" means it is not climbing on the ladderORrope
+           isClimbing = false; //set the isClimbing variable to "false" means it is not climbing on the ladderORrope
 
-        }
+       }
 
-        if (isClimbing == true) //if the isClimbing variable is "true" then
-        {
+       if (isClimbing == true) //if the isClimbing variable is "true" then
+       {
 
-            inputVertical = Input.GetAxisRaw("Vertical"); //Get the player input for the Y axis (up and down) - keyboard keys "W" and "S"
-            m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, inputVertical * speed); //Moves the player object up at a certain speed specified by the user
-            m_Rigidbody.gravityScale = 0; //Set the RigidBody Gravity Scale to "0" so that player can easily climb on the ladderORrope
+           inputVertical = Input.GetAxisRaw("Vertical"); //Get the player input for the Y axis (up and down) - keyboard keys "W" and "S"
+           m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, inputVertical * speed); //Moves the player object up at a certain speed specified by the user
+           m_Rigidbody.gravityScale = 0; //Set the RigidBody Gravity Scale to "0" so that player can easily climb on the ladderORrope
 
-        }
+       }
 
-        else
-        {
+       else
+       {
 
-            m_Rigidbody.gravityScale = 5; //Set the RigidBody Gravity Scale to "5" because player is not climbing the ladderORrope
+           m_Rigidbody.gravityScale = 5; //Set the RigidBody Gravity Scale to "5" because player is not climbing the ladderORrope
 
-        }
-        //Ladder And Rope System "END"
+       }
+       //Ladder And Rope System "END"
 
-    }
+   }
 
     // Returns player's current health to script that calls it
     public float getPlayerHealth()
@@ -216,12 +200,12 @@ public class PlayerController : MonoBehaviour
         return currentHealth;
     }
 
-
     // Increase current score value by the amount
     public float updateScore(float amount)
-    {
+    {        
         score += amount;    // current score = current score + amount
-
+        Debug.Log(score);
+        
         //Debug.Log("PrefScore: " + PlayerPrefs.GetFloat("PlayerScore").ToString());
         return score;       // Return the score to Collectables script when called
     }

@@ -8,14 +8,49 @@ using System.IO;
 
 public class Menu : MonoBehaviour
 {
-
-    [SerializeField] private string levelOneSceneName;
+    string path;
+    [SerializeField] public RawImage image;
+    [SerializeField] public GameObject screen1;
+    [SerializeField] public GameObject screen2;
     [SerializeField] private string menuSceneName;
+    [SerializeField] private string levelOneSceneName;
+    public Button run;
+    public Texture m_Texture;
+    /*public Text toggleMusictxt;
+
+    private void Start()
+    {
+        if (SoundManagerScript.sounds.Audio.isPlaying)
+        {
+            toggleMusictxt.text = "OFF";
+        }
+        else
+        {
+            toggleMusictxt.text = "ON";
+        }
+    }
+
+    public void MusicToggle()
+    {
+        if(SoundManagerScript.sounds.Audio.isPlaying)
+        {
+            SoundManagerScript.sounds.Audio.Pause();
+            toggleMusictxt.text = "ON";
+        }
+        else
+        {
+            SoundManagerScript.sounds.Audio.Play();
+            toggleMusictxt.text = "OFF";
+        }
+    }
+    */
+
     public void startGame()
     {
         /*Calls the function LoadScene that loads
-         *  the scene that the player wants to start with
+         *  the scene named as 
          */
+        PlayerPrefs.SetFloat("TotalPlayerScore", 0);
         SceneManager.LoadScene(levelOneSceneName);
     }
 
@@ -30,5 +65,15 @@ public class Menu : MonoBehaviour
     public void returnToMenu()
     {
         SceneManager.LoadScene(menuSceneName);
+   
     }
+
+    public void switchToControlScreen()
+    {
+        screen2.SetActive(false);
+        screen1.SetActive(true);
+    }
+
+
+
 }
