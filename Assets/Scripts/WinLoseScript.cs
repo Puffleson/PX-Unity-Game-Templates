@@ -22,12 +22,17 @@ public class WinLoseScript : MonoBehaviour
     private Animator chestAnimator;
     private float currentScore = 0f;
 
+    private void Start()
+    {
+        PlayerPrefs.SetFloat("PlayerScore", 0);
+        Debug.Log("Total =" + PlayerPrefs.GetFloat("TotalPlayerScore"));
+    }
+
     // Update is called once per frame
     void Update()
     {
         //checkLoseCondition();       // Calls checkLoseCondition(); function
         checkKeyAmount();       // Calls checkKeyAmount(); function
-
     }
 
     // Runs when collider2D enters the chest's trigger collider2D
@@ -41,6 +46,7 @@ public class WinLoseScript : MonoBehaviour
             {
                 currentScore = player.getScore();       // Get current score
                 PlayerPrefs.SetFloat("PlayerScore", currentScore);      // Set global scene variable to use in Win and Lose Scenes
+                PlayerPrefs.SetFloat("TotalPlayerScore", PlayerPrefs.GetFloat("TotalPlayerScore") + currentScore);
                 chestAnimator.SetTrigger("touchChest");     // Set trigger on touchChest animation parameter to true, allows the chest to play ChestOpened
                 StartCoroutine(waitWinScreenTransition());  // stops all functions and runs this only until its done
             }
@@ -58,14 +64,16 @@ public class WinLoseScript : MonoBehaviour
             //TODO: Bool to turn off movements
             currentScore = player.getScore();       // Get current score
             PlayerPrefs.SetFloat("PlayerScore", currentScore);     // Set global scene variable to use in Win and Lose Scenes
+            PlayerPrefs.SetFloat("TotalPlayerScore", PlayerPrefs.GetFloat("TotalPlayerScore") + currentScore);
             SceneManager.LoadScene(loseSceneName);      // Change to lose screen
 
         }
 
         if (currentHealth <= lowHealth)
         {
+            FindObjectOfType<SoundManagerScript>().Play("PlayerDeath");
             Debug.Log("Low Health");
-            //add funky music??
+
         }
     }
 
@@ -80,5 +88,6 @@ public class WinLoseScript : MonoBehaviour
     {
         yield return new WaitForSeconds(timeUntilWinTransition);    // Wait specified amount of seconds until script continues running
         SceneManager.LoadScene(winSceneName);       // Load win screen
+        
     }
 }
