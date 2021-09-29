@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
        getMovementKey(horizontalMove * Time.fixedDeltaTime);      // Calls getMovementKey() function and passes the input the user presses
        getState();      // Calls getState() function
        m_Animator.SetInteger("state", (int)state);      // Set the current state the player is current in "State {idle, run, jump, fall}"
+        ladderAndropeSystem();
     }
 
     // Uses the player input to move the character
@@ -187,7 +188,7 @@ public class PlayerController : MonoBehaviour
        else
        {
 
-           m_Rigidbody.gravityScale = 5; //Set the RigidBody Gravity Scale to "5" because player is not climbing the ladderORrope
+           m_Rigidbody.gravityScale = 1; //Set the RigidBody Gravity Scale to "5" because player is not climbing the ladderORrope
 
        }
        //Ladder And Rope System "END"
