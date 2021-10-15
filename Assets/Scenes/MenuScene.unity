@@ -2981,13 +2981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c128177ecb9a984e9258ca7b77968e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  screen1: {fileID: 0}
-  screen2: {fileID: 0}
-  menuSceneName: 
   levelOneSceneName: Level 1
-  run: {fileID: 0}
-  m_Texture: {fileID: 0}
 --- !u!1 &1325870940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3986,7 +3980,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8dc4db23752b64c9d2d9ab36270bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 281302e092d72fa4aa94499da2c82fe5, type: 3}
+    volume: 0.299
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jump
+    clip: {fileID: 8300000, guid: df49cf07a7e498e4aa4bf3691217ad9e, type: 3}
+    volume: 0.319
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: click
+    clip: {fileID: 8300000, guid: 6c5f5fdab0963284eb77fdde3d647803, type: 3}
+    volume: 0.345
+    pitch: 1.13
+    loop: 0
+    source: {fileID: 0}
+  - name: enemyKill
+    clip: {fileID: 8300000, guid: 72c13f0d1da632043a2b76e37ec3d0f4, type: 3}
+    volume: 0.319
+    pitch: 1.11
+    loop: 0
+    source: {fileID: 0}
+  - name: win
+    clip: {fileID: 8300000, guid: ee87f3a21e28dbb4a8c49880a5885066, type: 3}
+    volume: 0.319
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: loose
+    clip: {fileID: 8300000, guid: fd985193786248a41a5d86195a701812, type: 3}
+    volume: 0.319
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: 961c99a5cd5cfb242b7853695014bee9, type: 3}
+    volume: 0.105
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   Audio: {fileID: 0}
 --- !u!4 &2141275996
 Transform:

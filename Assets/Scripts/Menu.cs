@@ -50,7 +50,6 @@ public class Menu : MonoBehaviour
         /*Calls the function LoadScene that loads
          *  the scene named as 
          */
-        PlayerPrefs.SetFloat("TotalPlayerScore", 0);
         SceneManager.LoadScene(levelOneSceneName);
     }
 

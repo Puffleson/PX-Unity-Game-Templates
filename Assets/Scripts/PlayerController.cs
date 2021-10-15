@@ -49,9 +49,6 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody2D>();      // Get the current object's Rigidbody2D component
         m_Animator = GetComponent<Animator>();      // Get the current object's Animator component
         m_Collider = GetComponent<Collider2D>();   // Get the current object's Collider2D component
-        score = 0;
-        currentKeyAmount = 0;
-
     }
 
     // Runs once every frame
@@ -61,7 +58,7 @@ public class PlayerController : MonoBehaviour
        getMovementKey(horizontalMove * Time.fixedDeltaTime);      // Calls getMovementKey() function and passes the input the user presses
        getState();      // Calls getState() function
        m_Animator.SetInteger("state", (int)state);      // Set the current state the player is current in "State {idle, run, jump, fall}"
-        ladderAndropeSystem();
+       ladderAndropeSystem();
     }
 
     // Uses the player input to move the character
