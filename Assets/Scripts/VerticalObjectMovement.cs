@@ -5,7 +5,7 @@ using UnityEngine;
 public class VerticalObjectMovement : MonoBehaviour
 {
     [SerializeField]
-    private float crusherSpeed;
+    private float objectSpeed;
     // declared a float variable
     [SerializeField]
     private Transform upPoint;
@@ -43,12 +43,12 @@ public class VerticalObjectMovement : MonoBehaviour
 
         if (chop)
         {
-            transform.position = Vector2.MoveTowards(transform.position, downPoint.position, crusherSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, downPoint.position, objectSpeed * Time.deltaTime);
         }
         // if chop is true , then move the gameobject's position , to the downpoint with a speed of "crusherspeed*Time.deltaTime"
         else
         {
-            transform.position = Vector2.MoveTowards(transform.position, upPoint.position, crusherSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, upPoint.position, objectSpeed * Time.deltaTime);
 
         }
         // if chop is false , then move the gameobject's position , to the upPoint with a speed of "crusherspeed*Time.deltaTime"

@@ -317,11 +317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120866, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.49
+      value: 9.82
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120866, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.56
+      value: -3.31
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120866, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_LocalPosition.z
@@ -356,8 +356,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120876, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 8471789966514120876, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_Name
-      value: UpPoint
+      value: RightPoint
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120877, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_Enabled
@@ -749,6 +753,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1440598844}
     - target: {fileID: 2273775226962255807, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
+      propertyPath: objectSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273775226962255807, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
       propertyPath: crusherSpeed
       value: 3
       objectReference: {fileID: 0}
@@ -766,11 +774,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7341214470726491965, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.17
+      value: 3.89
       objectReference: {fileID: 0}
     - target: {fileID: 7341214470726491965, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.1899996
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 7341214470726491965, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -816,8 +824,29 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2273775226962255807, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
+--- !u!1 &500529371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7341214470726491955, guid: 6181a54e776844c34b78ca14840e602c, type: 3}
+  m_PrefabInstance: {fileID: 500529370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &500529372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500529371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099efa3214cd2d648a0e70a54c1624a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectSpeed: 2
+  rightPoint: {fileID: 326383845}
+  leftPoint: {fileID: 1440598844}
 --- !u!1001 &540581301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1884,11 +1913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120866, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.49
+      value: 6.76
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120866, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.24
+      value: -3.28
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120866, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1923,8 +1952,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120876, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 8471789966514120876, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_Name
-      value: DownPoint
+      value: LeftPoint
       objectReference: {fileID: 0}
     - target: {fileID: 8471789966514120877, guid: f011277d43518474a92f09bcc99e6fda, type: 3}
       propertyPath: m_Enabled
